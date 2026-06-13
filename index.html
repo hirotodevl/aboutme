@@ -1,74 +1,289 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>あんどう ひろと</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
-    <style>
-        body {
-            background-color: #fafafa;
-            color: #333;
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
-        }
-        .link-card {
-            transition: all 0.3s ease;
-        }
-        .link-card:hover {
-            transform: translateY(-2px);
-            border-color: #999;
-            background-color: #fdfdfd;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hiroto</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#f5f5f7;
+  --card:rgba(255,255,255,.7);
+  --text:#111;
+  --sub:#6e6e73;
+  --border:rgba(255,255,255,.5);
+}
+
+.dark{
+  --bg:#000;
+  --card:rgba(30,30,30,.6);
+  --text:#fff;
+  --sub:#b5b5b7;
+  --border:rgba(255,255,255,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.4s;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+  radial-gradient(circle at 20% 20%,#2997ff40,transparent 30%),
+  radial-gradient(circle at 80% 70%,#7d5fff30,transparent 30%);
+  z-index:-1;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
+  backdrop-filter:blur(20px);
+  z-index:100;
+}
+
+.logo{
+  font-weight:700;
+  font-size:1.2rem;
+}
+
+.theme-btn{
+  border:none;
+  background:var(--card);
+  color:var(--text);
+  padding:10px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  backdrop-filter:blur(20px);
+}
+
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  perspective:1000px;
+}
+
+.parallax{
+  max-width:900px;
+  transform-style:preserve-3d;
+  transition:transform .1s;
+}
+
+.hero h1{
+  font-size:clamp(4rem,10vw,8rem);
+  font-weight:700;
+  letter-spacing:-4px;
+  transform:translateZ(60px);
+}
+
+.hero p{
+  margin-top:20px;
+  font-size:1.3rem;
+  color:var(--sub);
+  transform:translateZ(30px);
+}
+
+.hero-btn{
+  margin-top:35px;
+  display:inline-block;
+  padding:15px 32px;
+  border-radius:999px;
+  text-decoration:none;
+  color:white;
+  background:#0071e3;
+  transform:translateZ(50px);
+  transition:.3s;
+}
+
+.hero-btn:hover{
+  transform:translateZ(50px) scale(1.05);
+}
+
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:120px 30px;
+}
+
+.title{
+  font-size:3rem;
+  margin-bottom:50px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(30px);
+  padding:35px;
+  border-radius:28px;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card h3{
+  margin-bottom:15px;
+  font-size:1.3rem;
+}
+
+.card p{
+  color:var(--sub);
+  line-height:1.7;
+}
+
+footer{
+  text-align:center;
+  padding:60px;
+  color:var(--sub);
+}
+
+.apple-gradient{
+  background:linear-gradient(
+    90deg,
+    #0071e3,
+    #7d5fff,
+    #ff375f
+  );
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+</style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
+<body>
 
-    <div class="max-w-md w-full text-center">
-        <div class="mb-6">
-            <img src="https://via.placeholder.com/120" alt="Profile" class="w-24 h-24 rounded-full mx-auto border border-gray-200 shadow-sm">
-        </div>
+<nav>
+  <div class="logo">Hiroto</div>
+  <button class="theme-btn" id="themeBtn">
+    🌙 Dark Mode
+  </button>
+</nav>
 
-        <h1 class="text-2xl font-bold mb-2 tracking-tight">あんどう ひろと</h1>
-        <p class="text-gray-500 mb-10 text-sm leading-relaxed">
-    　　東京都出身で名取市在住の高1。GitHubでのコーディングにハマり中。
-       趣味はガジェット、デスク構築、音楽鑑賞など。犬も好きです。
-        </p>
+<header class="hero">
+  <div class="parallax" id="parallax">
 
-        <div class="space-y-4">
-            
-            <a href="https://instagram.com/5_.hi1x" target="_blank" class="link-card flex items-center justify-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-sm">
-                <span class="material-symbols-outlined mr-3 text-gray-500 text-xl">instagram</span>
-                <span class="font-medium text-sm">Instagram</span>
-            </a>
+    <h1 class="apple-gradient">
+      Think Different.
+    </h1>
 
-            <a href="https://x.com/hiroto_6922" target="_blank" class="link-card flex items-center justify-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-sm">
-                <span class="material-symbols-outlined mr-3 text-gray-500 text-xl">x</span>
-                <span class="font-medium text-sm">X</span>
-            </a>
-            
-            <a href="https://github.com/hirotodevl" target="_blank" class="link-card flex items-center justify-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-sm">
-                <span class="material-symbols-outlined mr-3 text-gray-500 text-xl">code</span>
-                <span class="font-medium text-sm">GitHub</span>
-            </a>
+    <p>
+      Student • Creator • Future Software Engineer
+    </p>
 
-            <a href="mailto:hiro1115ad@gmail.com" class="link-card flex items-center justify-center p-4 bg-white border border-gray-200 rounded-lg hover:shadow-sm">
-                <span class="material-symbols-outlined mr-3 text-gray-500 text-xl">mail</span>
-                <span class="font-medium text-sm">E-Mail</span>
-            </a>
+    <a href="#about" class="hero-btn">
+      Explore
+    </a>
 
-        </div>
+  </div>
+</header>
 
-        <footer class="mt-16 text-gray-400 text-[10px] tracking-widest uppercase">
-            © 2026 あんどう ひろと
-        </footer>
+<section id="about">
+
+  <h2 class="title">About</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>💻 Development</h3>
+      <p>
+        Web開発とソフトウェア開発を学習中。
+      </p>
     </div>
+
+    <div class="card">
+      <h3>🎬 Content</h3>
+      <p>
+        Vlog制作や映像編集に挑戦。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🌎 Future</h3>
+      <p>
+        海外でソフトウェアエンジニアとして働くことが目標。
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Hiroto
+</footer>
+
+<script>
+
+const btn = document.getElementById("themeBtn");
+
+btn.addEventListener("click",()=>{
+
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    btn.textContent="☀️ Light Mode";
+  }else{
+    btn.textContent="🌙 Dark Mode";
+  }
+});
+
+const card = document.getElementById("parallax");
+
+document.addEventListener("mousemove",(e)=>{
+
+  const x =
+  (window.innerWidth/2 - e.clientX)/30;
+
+  const y =
+  (window.innerHeight/2 - e.clientY)/30;
+
+  card.style.transform =
+  `rotateY(${x}deg)
+   rotateX(${-y}deg)`;
+
+});
+
+document.addEventListener("mouseleave",()=>{
+
+  card.style.transform =
+  "rotateY(0deg) rotateX(0deg)";
+
+});
+
+</script>
 
 </body>
 </html>
